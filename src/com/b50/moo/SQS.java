@@ -143,7 +143,6 @@ public class SQS {
             this.callback = callback;
         }
 
-        @Override
         public void onThresholdExceeded(final long waitTime) {
             this.callback.onThresholdExceeded(waitTime);
         }
