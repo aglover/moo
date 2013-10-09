@@ -10,7 +10,7 @@ And what do you do when those alarms are triggered? Fire up more queue workers, 
 
 #### Not all environments are the same
 
-But what if you are in a consistently busy environment with extreme bursts where queues can fill up rapidly? If you have sufficient workers _already running_ to handle that burst, do you need to fire up more? You can fire up more workers, but it might cost you. That is, you might have to provision new worker instances, such as [Heroku worker dynos](https://devcenter.heroku.com/articles/dynos) or AWS AMIs, which will end up costing you money. And sometimes those worker instances take a few moments to fire up and when they're operational, the burst of activity is over and the queue is back to normal -- the initially available workers handled the load adequately. 
+But what if you're in a consistently busy environment with extreme bursts where queues can fill up rapidly? If you have sufficient workers _already running_ to handle that burst, do you need to fire up more? You can fire up more workers, but it might cost you. That is, you might have to provision new worker instances, such as [Heroku worker dynos](https://devcenter.heroku.com/articles/dynos) or AWS AMIs, which will end up costing you money. And sometimes those worker instances take a few moments to fire up and when they're operational, the burst of activity is over and the queue is back to normal -- the initially available workers handled the load adequately. 
 
 That is, if you already have sufficient capacity to handle the influx of messages on a queue, then monitoring a queue's length isn't too helpful. In fact, it's a misleading metric and can cause you to take unneeded actions. What's more, a queue's length is a lagging indicator when there's sufficient capacity -- in many cases, by the time you are notified that some threshold was met, enough messages have already been processed, thus triggering a false alarm.
 
@@ -20,7 +20,7 @@ Consequently, a queue's length _is not indicative of a system's efficiency_ when
 
 In high capacity, bursty environments where there are usually multiple worker processes reading from queues, a message's time in queue can effectively be leveraged to augment capacity. If the time in queue metric starts rising, then you have an indication that there aren't sufficient processes to work off the load. Consequently, you can bring on more processes to handle the load. 
 
-There's an interesting parallel here: the queue _will also have a lot of messages in it_. That is, queue length monitors will fire correctly, but the action to take is derived not from the queue's length but from the time in queue metric. Thus, while a queue full of messages don't necessarily mean you need to take action, an increase in queue wait time is actionable. 
+There's an interesting parallel here: the queue _will also have a lot of messages in it_. That is, queue length monitors will fire correctly, but the action to take is derived not from the queue's length but from the time in queue metric. Thus, while a queue full of messages doesn't necessarily mean you need to take action, an increase in queue wait time is actionable. 
 
 ## What does Moo do actually?
 
@@ -30,7 +30,7 @@ By default, SQS doesn't provide the ability to query how long a message has been
 
 Moo provides an interface for clients to obtain and take action on the message time in queue metric. This is done by augmenting an SQS message with a time stamp. That time stamp is then checked when a message is popped off of an SQS queue. If a threshold difference is exceed then a callback is invoked. 
 
-Users of Moo will find it's usage similar to [Ahoy!](https://github.com/aglover/ahoy), which is an asynchronous callback oriented facade on top of AWS's Java SDK. In fact, Moo uses Ahoy! underneath, with the added feature of attaching a maximum time in queue asynchronous callback.
+Users of Moo will find it's usage similar to [Ahoy!](https://github.com/aglover/ahoy), which is an asynchronous callback oriented facade on top of AWS's Java SDK. In fact, Moo uses Ahoy! underneath, with the added feature of attaching a "maximum time in queue" asynchronous callback.
 
 Moo supports multiple time in queue thresholds and setting a maximum time in queue threshold is done like so:
 
