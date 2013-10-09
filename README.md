@@ -106,8 +106,15 @@ sqs.receive(new ReceiveCallback() {
 
 Note, if upon the receive of a message, Moo notices that a message has been waiting in a queue for more than the max queue wait time threshold configured for an associated `QueueWaitTimeCallback`, Moo will invoke it. 
 
+## Various Details
 
+Moo is a facade to [AWS's Java SDK](http://aws.amazon.com/sdkforjava/) -- in essence, Moo makes working with SQS easier. Accordingly, to use Moo, you'll also need the AWS Java SDK. Have a look at Ahoy! as well -- Moo uses [Ahoy!](https://github.com/aglover/ahoy) internally for asynchronous callbacks. 
 
+Finally, to see how Moo works, I highly recommend you take a look at the various test cases in the `test` folder. 
+
+To build Moo, you'll need Ant -- just type `ant jar` and Moo will run a bunch of tests, plus produce a jar file for you. 
+
+Finally, you can see how Moo works in the real by running the task `functional-test`; however, for that to work, you'll need to create a `local.properties` file that has a few properties (see the `default.properties` file for more details).
 
 ## Some more details
 
