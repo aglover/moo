@@ -1,0 +1,10 @@
+*.class
+
+# Package Files #
+*.war
+*.ear
+*.iml
+.idea/
+.DS_Store
+target/
+local.properties

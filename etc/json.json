@@ -1,0 +1,8 @@
+{
+    "msg":{
+        "some-value":"test",
+        "some-num":11,
+        "some-array":[1,2,3]
+    },
+    "ts":"1381172826511"
+}
