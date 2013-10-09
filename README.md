@@ -30,7 +30,7 @@ By default, SQS doesn't provide the ability to query how long a message has been
 
 Moo provides an interface for clients to obtain and take action on the message time in queue metric. This is done by augmenting an SQS message with a time stamp. That time stamp is then checked when a message is popped off of an SQS queue. If a threshold difference is exceed then a callback is invoked. 
 
-Users of Moo will find it's usage similar to [Ahoy!](https://github.com/aglover/ahoy), which is an asynchronous callback oriented facade on top of AWS's Java SDK. In fact, Moo uses Ahoy! underneath, with the added feature of attaching a "maximum time in queue" asynchronous callback.
+Users of Moo will find its usage similar to [Ahoy!](https://github.com/aglover/ahoy), which is an asynchronous callback oriented facade on top of AWS's Java SDK. In fact, Moo uses Ahoy! underneath, with the added feature of attaching a "maximum time in queue" asynchronous callback.
 
 Moo supports multiple time in queue thresholds and setting a maximum time in queue threshold is done like so:
 
@@ -50,7 +50,7 @@ Note the `addQueueWaitTimeCallback` method takes a millisecond maximum time in q
 
 Because Moo augments a sent message, you must use (for now) a Moo client to receive that message. That is, Moo wraps an incoming message, be it XML, JSON, or plain text, with some meta data (namely a time stamp) and parses out the original data upon receive. You do not have to do anything on your part. 
 
-Moo, however, will validate the length of a message before sending it as AWS will reject messages larger than 256KB. Moo requires 30 bytes to store a time stamp and to wrap the original message body. Accordingly, to use Moo, your messages must be less than 262113 bytes.
+Moo, however, will validate the length of a message before sending it as AWS will reject messages larger than 256KB. Moo requires 30 bytes to store a time stamp and to wrap the original message body. Accordingly, to use Moo, your messages must be less than 262,113 bytes.
 
 #### Show me the Moo
 
